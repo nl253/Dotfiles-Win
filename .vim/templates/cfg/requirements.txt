@@ -1,0 +1,31 @@
+# dev
+
+## code style & linters
+pylama
+pydocstyle
+profiling
+pylint
+pyflakes
+flake8
+isort
+
+## static typing
+mypy
+
+## find dead code
+vulture
+
+# tools
+
+## completion
+jedi
+
+## repl
+ipython
+
+# documentation
+sphinx
+
+# cli
+docopt
+# vim:ft=cfg:

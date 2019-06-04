@@ -1,0 +1,11 @@
+*~
+~*
+*#
+#*
+**/build
+**/dist
+**/*.log
+**/*.tmp
+**/__*
+**/*.bak
+.vim\plugged

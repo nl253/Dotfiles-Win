@@ -1,0 +1,422 @@
+snippet "(__){,2}init" "__init__ [python]" rb
+def __init__(self):
+    $1
+endsnippet
+
+snippet "sched(ul(er)?)?" "scheduler wrapper [python]" 
+class MyScheduler():                                                                                
+
+    def __init__(self, scheduler=sched.scheduler()) -> None:
+        self.s: sched.scheduler = scheduler
+
+    def rel(self, task, delay: float = 0, priority: int = 1, kwargs={}) -> MyScheduler:
+        self.s.enter(action=task, delay=delay, priority=priority, kwargs=kwargs)                                                                   
+        return self
+
+    def abs(self, task, time: float = time.monotonic(), priority: int = 1, kwargs={}) -> MyScheduler:
+        self.s.enterabs(action=task, time=time, priority=priority, kwargs=kwargs)                                                                   
+        return self
+
+    def run(self) -> MyScheduler:
+        self.s.run()
+        return self  
+endsnippet
+
+snippet "diff[ertia]{,8}" "differentiate {sympy} [python]" br
+import sympy
+x, y, z = sympy.symbols('x y z')
+expr = (x**2 + y * x + 2 / x + sympy.log(2, x)).simplify()
+print(sympy.diff(expr, x))
+endsnippet
+
+snippet integrate "integrate {sympy} [python]" b
+import sympy
+x, y, z = sympy.symbols('x y z')
+expr = (x**2 + y * x + 2 / x + sympy.log(2, x)).simplify()
+print(sympy.integrate(expr, x))
+endsnippet
+
+snippet simplify "simplify algebraic expression {sympy} [python]" b
+import sympy
+x, y = sympy.symbols('x y')
+expr = x**2 + y * x + 2 / x + sympy.log(2, x)
+print(expr.simplify())
+endsnippet
+
+snippet #! "#! [python]"
+#!/usr/bin/env python3 
+endsnippet
+
+snippet print "print [python]" 
+print($1)
+endsnippet
+
+snippet printf "printf [python]" 
+print(f"$1")
+endsnippet
+
+snippet "elif?" "elif [python]" r
+elif ${1:CONDITION}:
+    pass
+endsnippet
+
+snippet if "if [python]" 
+if $1:
+    $2
+endsnippet
+
+snippet else "else [python]" 
+else:
+    $1
+endsnippet
+
+snippet "get|urlopen" "GET request {urllib.request} [python]" rb
+with urlopen('https://www.some.com', timeout=10) as website:
+    html: Text = website.read().decode('utf-8')
+endsnippet
+
+snippet "argp(ar(se?)?)?" "argument parser {argparse} [python]" r
+from argparse import Namespace, ArgumentParser
+
+parser: ArgumentParser = ArgumentParser(
+        prog="project",
+        description="",
+        epilog="")
+
+parser.add_argument(
+        "-v",
+        "--verbosity",
+        help="increase output verbosity",
+        action="count")
+
+args: Namespace = parser.parse_args()
+endsnippet
+
+snippet class "class [python]"
+class $1:
+    $2
+endsnippet
+
+snippet "re[gex]{,3}" "regex {re} [python]" r
+pattern: Pattern = re.compile(r"$1")
+matches: List[Text] = pattern.findall($2)
+endsnippet
+
+snippet "re[gex]{,3}groups" "regex groups {re} [python]" r
+groups: Tuple[str, str] = regex_object.groups(${1:0})
+endsnippet
+
+snippet "set[ter]{,3}" "setter [python]" r
+@$1.setter
+def $1(new_value: $2):
+    self._$1 = new_value
+
+endsnippet
+
+snippet "doc[string]{,6}" "docstring [python]" r
+"""$1
+"""
+endsnippet
+
+snippet "[unit]{,4}test" "unit test {unittest} [python]" r
+class MyObjectTest(unittest.TestCase):
+
+     def setUp(self):
+        pass # prepare
+
+     def tearDown(self):
+        pass # clean up 
+
+    def test_method1(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+if __name__ == '__main__':
+    unittest.main()
+endsnippet
+
+snippet main "if __name__ == __main__ [python]" b
+def main():
+    $1
+endsnippet
+
+snippet "if _[_name]{,5}" "if __name__ == __main__ [python]" rb
+if __name__ == '__main__':
+    $1
+endsnippet
+
+snippet def "function [python]" b
+def $1($2) -> $3:
+    $4
+endsnippet
+
+snippet "(mod(ule)?)?doc(str(ing)?)?" "module docstring [python]" r
+"""`!p import re; snip.rv = re.sub("\.\w+$", "", snip.fn).capitalize()`
+
+Description: 
+    Project Description
+
+Contact:
+    Author: `echo $USER`
+    Github: https://github.com/`git config user.name`
+    Email:  `git config user.email`
+
+Todo:
+    * For module TODOs
+    * You have to also use ``sphinx.ext.todo`` extension
+"""
+endsnippet
+
+snippet enum "enum {enum} [python]"
+@unique
+class Color(Enum):
+    RED   = auto()
+    BLUE  = auto()
+endsnippet
+
+snippet faker "mock data {faker} [python]" 
+mock_factory = Faker()
+endsnippet
+
+snippet write "write to a file [python]" 
+with open($1, encoding='utf-8', mode="w") as f:
+    f.write($2)
+    $2
+endsnippet
+
+snippet read "read from a file [python]"
+with open($1, encoding='utf-8') as f:
+    text: Text = f.read()
+    $2
+endsnippet
+
+snippet while "while loop [python]" 
+while $1:
+    $2
+endsnippet
+
+snippet "prop(erty)?" "property [python]" r
+@property
+def $1($2) -> $3:
+    return self._$1
+endsnippet
+
+snippet "log|info" "log info [python]" r
+log.info($1)
+endsnippet
+
+snippet "warn(ing)?" "log warn [python]" r
+log.warn($1)
+endsnippet
+
+snippet "err(or)?" "log.error (...) [python]" r
+log.error($1)
+endsnippet
+
+snippet "cri[tical]{,5}" "log.critical (...) [python]" r
+log.critical($1)
+endsnippet
+
+snippet "logger|logging" "logging init {logging} [python]" r
+import logging
+from logging import Logger
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    filemode='w',
+    format='%(processName)s %(threadName)s %(module)s %(levelname)s [%(asctime)s] [%(lineno)s] %(message)s.',
+    datefmt="%M:%S")
+
+log: Logger = logging.getLogger(name=__name__)
+endsnippet
+
+snippet "breakp(oint)?|bp" "break point [python]" rb
+import ipdb ; ipdb.set_trace() # XXX
+endsnippet
+
+snippet try "try [python]" b
+try:
+    $1
+except Exception as e:
+    $2
+endsnippet
+
+snippet "downl(oad)?|fetch(er)?" "download or read file [python]" r
+import re
+import os
+from typing import Dict
+import shutil
+
+def fetcher(variables: Dict[str, str], source: str, output: str) -> None:
+
+    source: str = source.strip()
+    output: str = expand(output).strip()
+
+    if not os.path.exists(output):
+
+        if re.compile('^https?').search(source):
+
+                local_file.close()
+
+        elif isfile(expand(source)):
+
+            source = expand(source)
+            print('file_fetcher: a valid file detected: {source}')
+            print('file_fetcher: copying')
+            shutil.copy(source, output)
+
+        else:
+            print(f'Invalid source {source}.')
+endsnippet
+
+
+snippet "templ(ate)?" "templating boilerplate [python]" r
+from typing import Dict
+
+variables: Dict[str, str] = {}
+
+def template_substitute(file_name: str, variables: Dict[str, str]) -> str:
+    with open(file_name, encoding='utf-8') as target_file:
+        template = string.Template(target_file.read())
+        target_file.close()
+
+    with open(file_name, mode="w", encoding='utf-8') as target_file:
+        target_file.write(template.safe_substitute(variables))
+        target_file.close()
+endsnippet
+
+snippet "jsonr(ead)?" "jSON read from file [python]" r
+import json
+from typing import Any, Dict, Optional
+
+def json_read() -> Optional[Dict[Any, Any]]:
+    with open(os.path.expanduser('~/.projectrc.json'), encoding="utf-8") as json_file:
+		user_configuration = json.loads(json_file.read(), encoding="utf-8")
+		return user_configuration
+endsnippet
+
+snippet "stack|sci(py?)?" "import the whole scipy stack [python]" r
+import numpy as np
+import pandas as pd
+import scipy as sc
+from scipy import stats, stats
+endsnippet
+
+snippet "sql(i(te?)?)?|datab(ase)?|db" "sQLite3 [python]" r
+import sqlite3
+from sqlite3 import Cursor, Connection
+from typing import , Callable, Union
+import os
+
+SQLiteDataType = Union[str, float, int, None]
+Row = Tuple[SQLiteDataType, ...]
+
+database_path: str = '${1:db_path}'
+
+if os.path.exists(database_path):
+    print('Existing database detected...')
+else:
+    print(f'New database will be dropped in {database_path}.')
+connection: Connection = sqlite3.connect(database_path)
+
+def query(query_string: Text, data: Iterable):
+	with connection:
+		with connection.cursor() as cursor:
+			for row in cursor.execute(query_string, data):
+				print(row)
+endsnippet
+
+snippet "type?(ing)?" "import types from typing [python]" rb
+from typing import ${1:Text, List, Tuple, Any, Iterable}
+endsnippet
+
+snippet pathlib "file access utils {pathlib} [python]" 
+import os
+from pathlib import Path
+endsnippet
+
+snippet copy "copy objects [python]" 
+from copy import copy
+endsnippet
+
+snippet pprint "pprint {pprint} [python]" 
+pprint($1)
+endsnippet
+
+snippet islice "islice {itertools} [python]" 
+slice: Iterable = islice(${1:iter}, ${2:start}, ${3:stop})
+endsnippet
+
+snippet "red(uce)?" "reduce {functools} [python]" r
+reduced: Iterable = reduce(${1:f}, ${2:iter})
+endsnippet
+
+snippet glob "uNIX-style globs [python]" 
+from glob import glob, iglob
+nodes: List[Text] = glob('${1:DIRNAME}/**', recursive=True)
+endsnippet
+
+snippet "fori?" "for loop [python]" rb
+for i in $1:
+    $2
+endsnippet
+
+snippet "tempf(ile?)?" "temp file {tempfile} [python]" r
+fp = TemporaryFile()
+endsnippet
+
+snippet "tempd(ir?)?" "temp dir {tempfile} [python]" r
+fp = TemporaryDirectory()
+endsnippet
+
+snippet "op?conc(at)?" "concat function [python]" r
+from operator import concat
+endsnippet
+
+snippet "op{,2}?add" "add function [python]" r
+from operator import add
+endsnippet
+
+snippet "op{,2}cont(ains?)?" "add function [python]" r
+from operator import contains
+endsnippet
+
+snippet "op{,2}?count([Oo]f)?" "countOf function [python]" r
+from operator import countOf # number occurrences of b in a.
+endsnippet
+
+snippet "op{,2}?xor" "XOR function [python]" r
+from operator import xor 
+endsnippet
+
+snippet "op{,2}?or" "OR function [python]" r
+from operator import or 
+endsnippet
+
+snippet "op{,2}?neg" "OR function [python]" r
+from operator import neg 
+endsnippet
+
+snippet "op{,2}?mod" "modulus function [python]" r
+from operator import mod 
+endsnippet
+
+snippet "csv(read(er)?)?" "CSV reader [python]" r
+import csv
+with open('${1:CSV_FILENAME}.csv') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        print(', '.join(row))
+endsnippet
+
+snippet "csvw(riter?)?" "CSV writer [python]" r
+import csv
+with open('${1:CSV_FILENAME}.csv', 'w') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['Spam'] * 5 + ['Baked Beans'])
+    writer.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+endsnippet
+
+snippet with "with [python]" b
+with open($1) as stream:
+    $2
+endsnippet

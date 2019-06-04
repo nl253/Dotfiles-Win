@@ -1,0 +1,134 @@
+snippet for "for (...) in  (...) ; do ... done [sh]"
+for $1; do
+  $2
+done
+endsnippet
+
+snippet "printf?" "printf [sh]" rb
+printf "${1:%s}" $2
+endsnippet
+
+snippet read "read -e -p ... -i ... ... [sh]"
+# read input into RESPONSE
+read -n 1 -p "Agree ? [y/n] => "
+endsnippet
+
+snippet array "declare -a ... [sh]"
+declare -a $1
+endsnippet
+
+snippet "readonly|const|final" "declare -r ... [sh]" rb
+declare -r $1
+endsnippet
+
+snippet int "declare -i ... [sh]"
+declare -i my-int # int variable
+endsnippet
+
+snippet "aarray|dict" "declare -A ... [sh]" r
+declare -A $1
+endsnippet
+
+snippet "dec[lare]{,4}" "declare [sh]" rb
+declare $1
+endsnippet
+
+snippet "case|switch" "case ... in ... esac [sh]" r
+case $filename in
+"$quit")
+  echo "exiting."
+  break
+  ;;
+*)
+  echo "you picked $filename ($REPLY)"
+  ;;
+esac
+endsnippet
+
+snippet select "select ... in ... ; do ... done [sh]"
+select filename in *; do
+  case $filename in
+  "$quit")
+    echo "exiting."
+    break
+    ;;
+  *)
+    echo "you picked $filename ($REPLY)"
+    ;;
+  esac
+done
+endsnippet
+
+snippet fori "for i in ... ; do ... done [sh]"
+for i in $1; do
+  $2
+done
+endsnippet
+
+snippet forc "for (( i = 1 ; i < ... ; i++ )) ; do ... done  [sh]"
+for ((i = 1; i <= 20; ++i)); do
+  $1
+done
+endsnippet
+
+snippet while "while [[ ... ]] ; do ... done [sh]"
+while [[ ${1:-e wait.txt} ]]; do
+  $2
+done
+endsnippet
+
+snippet "#!" "shebang #! [sh]" r
+#!/usr/bin/env bash
+endsnippet
+
+snippet echo "echo -e ... [sh]" 
+echo -e "$1"
+endsnippet
+
+snippet "py[thon]{,4}" "python << EOF ... EOF [sh]" rb
+python3 << EOF
+${1:CONTENT OF HEREDOC}
+EOF
+endsnippet
+
+snippet cat "cat << EOF ... EOF [sh]" 
+cat << EOF
+$1
+EOF
+endsnippet
+
+snippet else "else ... [sh]"
+else
+  ${2:local PASSWORD}
+endsnippet
+
+snippet elif "elif [[ ... ]] ; then ... [sh]"
+elif [[ ${1:-t 0} ]]; then
+  $2
+endsnippet
+
+snippet "\(\(" "((...)) [sh]" r
+((${1:VARIABLE}))
+endsnippet
+
+snippet "\[\[" "[[ ... ]] [sh]" r
+[[ ${1:-t} ${2:~/.file} ]]
+endsnippet
+
+snippet if "if [[ ... ]] ; then ... fi [sh]"
+if [[ ${1:-t 0} ]]; then
+  $2
+fi
+endsnippet
+
+snippet until "until [[ ... ]] ; do ... done [sh]"
+until [[ ${1:-e proceed.txt} ]]; do
+  $1
+done
+endsnippet
+
+snippet select "select [[ ... ]] ; do ... done [sh]"
+select input in $*; do
+  $1
+done
+endsnippet
