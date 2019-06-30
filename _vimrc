@@ -1,10 +1,21 @@
+if !has('nvim')
+  finish
+endif
+
+so ~\_gvimrc
+
+setg runtimepath^=~\.vim runtimepath+=~\.vim\after runtimepath-=~\AppData\Local\nvim runtimepath-=~\AppData\Local\nvim\after runtimepath-=~\AppData\Local\nvim\site
+let &packpath = &runtimepath
+
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (empty($TMUX))
   if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+    au TermOpen * star
+    tno <Esc> <C-\><C-n>
   endif
   "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
   "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
@@ -17,6 +28,9 @@ endif
 filetype plugin on
 " au FileType * syntax enable
 syntax on
+
+" annoying Windows shells don't support suspend
+nn <C-Z> :echoerr "Sorry, suspending doesn't work on Windows"<CR>
 
 let g:mapleader      = ' '
 let g:maplocalleader = ','
@@ -34,22 +48,30 @@ let g:config_ftypes  = [
 
 let g:prog_langs = [
       \ 'sql',
+      \ 'css',
+      \ 'html',
       \ 'sh',
       \ 'javascript',
       \ 'typescript',
       \ ]
 
-setg thesaurus=~/.vim/thesaurus.dict dictionary=~/.vim/frequent.dict sw=2 ts=4 expandtab virtualedit=all clipboard= autochdir autoread autowriteall backup breakat=\ .,:;!?' cmdwinheight=3 completeopt=menuone,longest fileignorecase diffopt+=vertical,iwhite gdefault hidden foldclose=all cpoptions=aABceFsW viewoptions=folds,options,curdir,cursor wildignorecase wildmenu wildoptions=tagfile winminwidth=20 winwidth=20 writebackup  incsearch laststatus=2 magic maxmempattern=200000 mouse=a nocompatible nohlsearch noignorecase noshowcmd nostartofline pumheight=12 scrolloff=11 sessionoptions+=resize sessionoptions-=blank sessionoptions-=options shiftround shortmess=stTAIcoOWF showbreak=\ >> sidescroll=1 sidescrolloff=30 spellsuggest=best,12, splitbelow splitright switchbuf=usetab,newtab, tagcase=ignore tagcase=match taglength=20 tagrelative tagstack undolevels=9999 updatetime=200 path+=.. path+=* wildignore=*~,*#,#*,*.dat*,node_modules/*,*-lock.json,*.min.*,out,*.class,*.beam,*.hi,*.pdf,*.ppt,*.pptx,*.doc,*.docx,*.jpg,*.png,*.ipynb,*history,*cache,.git,.idea,.svn,.hg,*.mpg,*.mp3,*.mp4,*.epub,*.msi,*.exe,*.dll,*~ grepprg=rg.exe\ --vimgrep\ --max-depth\ 5\ --max-filesize\ 70K\ --color\ never\ --no-line-buffered\ --no-messages\ --threads\ 4\ --trim\ --smart-case\ --one-file-system shell=powershell
+setg thesaurus=~/.vim/thesaurus.dict dictionary=~/.vim/frequent.dict sw=2 ts=4 expandtab virtualedit=all clipboard= autochdir autoread autowriteall backup breakat=\ .,:;!?' cmdwinheight=3 completeopt=menuone,longest fileignorecase diffopt+=vertical,iwhite gdefault hidden foldclose=all cpoptions=aABceFsW viewoptions=folds,options,curdir,cursor wildignorecase wildmenu wildoptions=tagfile winminwidth=20 winwidth=20 writebackup  incsearch laststatus=2 magic maxmempattern=200000 mouse=a nocompatible nohlsearch noignorecase noshowcmd nostartofline pumheight=12 scrolloff=11 sessionoptions+=resize sessionoptions-=blank sessionoptions-=options shiftround shortmess=stTAIcoOWF showbreak=\ >> sidescroll=1 sidescrolloff=30 spellsuggest=best,12, splitbelow splitright switchbuf=usetab,newtab, tagcase=ignore tagcase=match taglength=20 tagrelative tagstack undolevels=9999 updatetime=200 path+=.. path+=* wildignore=*~,*#,#*,*.dat*,node_modules/*,*-lock.json,*.min.*,out,*.class,*.beam,*.hi,*.pdf,*.ppt,*.pptx,*.doc,*.docx,*.jpg,*.png,*.ipynb,*history,*cache,.git,.idea,.svn,.hg,*.mpg,*.mp3,*.mp4,*.epub,*.msi,*.exe,*.dll,*~ grepprg=rg.exe\ --vimgrep\ --max-depth\ 5\ --max-filesize\ 70K\ --color\ never\ --no-line-buffered\ --no-messages\ --threads\ 4\ --trim\ --smart-case\ --one-file-system shell=powershell backupdir-=. shellcmdflag=-C shellquote=\" shellxquote= 
+
+if !executable('rg') && executable('grep') | setg shell=grep | endif
 
 if has('nvim')
   setg shada=!,'20,<50,s10,h,:50,f10 inccommand=nosplit
 endif
 
-au! BufEnter            ??*                     try | sil! lch %:p:h | cat /\vE(472|344|13)/ | endtry
-au! QuickFixCmdPost     c{ex,adde},grep{,a}*    exe 'bo cw '.((len(getqflist()[:10]) < 8) ? len(getqflist()) + 1 : "")
-au! QuickFixCmdPost     l{ex,gr,grepa,gete,ad}* exe 'bo lw '.((len(getloclist(win_getid())[:10]) < 8) ? len(getloclist(win_getid())) + 1 : "")
-au! QuickFixCmdPost     vim,lv,gr,lgr           try | sil! lch %:p:h | catch /\vE(472|344|13)/ | endtry
-au! CursorHold,BufEnter ~/*                     sil! checkt
+aug AUCMDS
+  au!
+  au BufEnter            ??*                     try | sil! lch %:p:h | cat /\vE(472|344|13)/ | endtry
+  au QuickFixCmdPost     c{ex,adde},grep{,a}*    exe 'bo cw '.((len(getqflist()[:10]) < 8) ? len(getqflist()) + 1 : "")
+  au QuickFixCmdPost     l{ex,gr,grepa,gete,ad}* exe 'bo lw '.((len(getloclist(win_getid())[:10]) < 8) ? len(getloclist(win_getid())) + 1 : "")
+  au QuickFixCmdPost     vim,lv,gr,lgr           try | sil! lch %:p:h | catch /\vE(472|344|13)/ | endtry
+  au CursorHold,BufEnter ~/*                     sil! checkt
+  "au BufWritePre * let &bex = '@'.substitute(strftime("%c"), '\v[^a-zA-Z0-9:]', '-', 'g').'~'
+aug END
 
 fu! s:register_ftype(patterns, filetype)
   exe 'au BufNewFile,BufRead '.join(a:patterns, ',').' if &filetype == "" | setl ft='.a:filetype.' | endif' 

@@ -1,0 +1,11 @@
+if has("gui_gtk2") || has("gui_gtk3")
+  setg guifont=Courier\ New\ 11
+elseif has("gui_photon")
+  setg guifont=Courier\ New:s11
+elseif has("gui_kde")
+  setg guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
+elseif has("x11")
+  setg guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+else
+  setg guifont=Consolas:h12
+endif

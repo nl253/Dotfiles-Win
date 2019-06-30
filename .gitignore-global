@@ -1,0 +1,96 @@
+# vim:ft=gitconfig:
+## tmp files
+
+**/*.swap
+**/*.swp
+**/*.log
+**/*-log
+**/*.bak
+**/*.bk
+**/*.tmp
+**/*~
+**/~*
+**/*#
+**/#*
+**/*-[cC]ache
+**/*_[cC]ache
+**/.[Cc]ache*
+
+## VCS
+
+**/.git
+**/.idea
+**/.svn
+
+## archives
+
+**/*.zip
+**/*.tar
+**/*.gzip
+**/*.7z
+**/*.bz2
+**/*.gz
+**/*.xz
+
+## documents
+
+**/*.doc
+**/*.docx
+**/*.pdf
+**/*.PDF
+**/*.ppt
+**/*.pptx
+
+## package managers
+
+**/node_modules/
+**/*-lock.json
+**/*.lock
+
+## Vim
+
+**/NetrwTreeListing*
+**/tags
+
+## database
+
+**/*.sqlite
+**/*.db
+**/*.sqlite3
+
+## Java
+
+**/*.class
+**/target
+**/out
+**/docs
+**/build
+**/dist
+
+## Erlang
+
+**/*.beam
+
+## C and C++
+
+**/*.o
+**/doc
+
+## Python
+
+**/.eggs
+**/*.egg
+**/develop-eggs
+**/*.pyc
+
+## LaTeX
+
+**/*.aux
+**/*.out
+**/*.tox
+**/*.fls
+**/*.fdb_latexmk
+
+## Haskell
+
+**/.stack-work

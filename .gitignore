@@ -1,11 +1,61 @@
-*~
-~*
-*#
-#*
-**/build
-**/dist
-**/*.log
-**/*.tmp
+**/*history
 **/__*
-**/*.bak
-.vim\plugged
+*~
+.dotnet
+.gem
+.git-credentials
+.vim/plugged
+.vim/.*
+3D Objects
+AppData/Local
+AppData/LocalLow
+AppData/Roaming/Code/Backups/
+AppData/Roaming/Code/Cache/
+AppData/Roaming/Code/CachedData/
+AppData/Roaming/Code/CachedExtensions/
+AppData/Roaming/Code/Cookies*
+AppData/Roaming/Code/GPUCache/
+AppData/Roaming/Code/Local Storage/
+AppData/Roaming/Code/Network Persistent State
+AppData/Roaming/Code/Preferences
+AppData/Roaming/Code/User/globalStorage/
+AppData/Roaming/Code/User/syncLocalSettings.json
+AppData/Roaming/Code/User/workspaceStorage/
+AppData/Roaming/Code/languagepacks.json
+AppData/Roaming/Code/logs/
+AppData/Roaming/Code/machineid
+AppData/Roaming/Code/storage.json
+AppData/Roaming/Intel
+AppData/Roaming/Jedi
+AppData/Roaming/Macromedia
+AppData/Roaming/Visual Studio Setup/
+AppData/Roaming/java/
+AppData/Roaming/nltk_data
+AppData/Roaming/npm-cache/
+AppData/Roaming/uTorrent Web/
+AppData/Roaming/vstelemetry/
+Contacts
+Desktop
+Downloads
+Favorites
+Google Drive
+IntelGraphicsProfiles
+Links
+MicrosoftEdgeBackups
+Music
+NTUSER.DAT*
+OneDrive
+Pictures
+Saved Games
+Searches
+Videos
+ntuser*
+ntuser.dat.LOG1
+ntuser.dat.LOG2
+ntuser.ini
+ntuser.pol
+.scoop
+.viminfo
+.rustup
+scoop
+.vscode/extensions
