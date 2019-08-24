@@ -5,10 +5,12 @@ sy region erlangEDocDescr    start="\v\@doc "     end="$" contained containedin=
 sy match erlangEDocParamVal      "\v<([A-Z][a-zA-Z]*)>" contained containedin=erlangEDocParam keepend
 sy match erlangEDocMetaTagMarker "@\v[a-z]{2,}"         contained containedin=erlangEDocMetaTag,erlangEDocDescr
 
-hi link erlangVariable          Constant
-hi link erlangStringModifier    SpecialChar
-hi link erlangAtom              Symbol
-hi link erlangBracket           NONE
+
+hi link erlangVariable       Constant
+hi link erlangStringModifier SpecialChar
+hi link erlangAtom           Symbol
+hi link erlangBracket        NONE
+hi link erlangBIF            Special
 
 hi def link erlangEDocDescr         Type
 hi def link erlangEDocParamVal      Type

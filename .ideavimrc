@@ -1,1 +1,26 @@
-so ~/AppData/Local/nvim/init.vim
+let mapleader = " "
+set clipboard=unnamedplus,unnamed
+set diffopt=filler,vertical
+set foldmethod=marker
+set gdefault
+set sidescrolloff=30
+set history=100
+set undolevels=1000
+set hidden
+set incsearch
+set hlsearch
+set ignorecase
+set lazyredraw
+set matchpairs+=<:>
+set noerrorbells
+set norelativenumber
+set nospell
+set nostartofline
+set number
+set spelllang=en_gb
+set surround 
+set mps+=<:>
+set virtualedit=all
+set visualbell
+set wildmode=full
+set wrap

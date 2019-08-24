@@ -1,111 +1,107 @@
 [user]
-	name  = Norbert Logiewa
-	email = norbertlogiewa96@gmail.com
+    name  = Norbert Logiewa
+    email = norbertlogiewa96@gmail.com
 
 [core]
-	excludesfile = C:\\Users\\Kier\\.gitignore-global
+    excludesfile = C:\\Users\\Kier\\.gitignore-global
 
-[credential]
-	helper = store
-	username = nl253
-
-[credential "helperselector"]
-	selected = store
 
 [diff]
-	tool = nvim
-	renames    = copies  # Detect copies as well as renames
-	algorithm = minimal
-	colorMoved = dimmed_zebra
-	indentHeuristic = true
-	wordRegex  = \\w+
+    tool = nvim
+    renames    = copies  # Detect copies as well as renames
+    algorithm = minimal
+    colorMoved = dimmed_zebra
+    indentHeuristic = true
+    wordRegex  = \\w+
 
 [help]
-	autoCorrect = 0
+    autoCorrect = 0
 
 [difftool]
-	prompt = 1
+    prompt = 1
 
 [log]
-	date = human
-	abbrevCommit = 1
+    date = human
+    abbrevCommit = 1
 
 [status]
-	short = 1
+    short = 1
 
 [format]
-	pretty = %>(16)%ad %Cgreen%h%Creset %s
+    pretty = %>(16)%ad %Cgreen%h%Creset %s
 
 [grep]
-	threads = 4
-	patternType = extended
-	lineNumber = 1
+    threads = 4
+    patternType = extended
+    lineNumber = 1
 
 [column]
-	ui = auto
-	status = auto
-	branch = auto
+    ui = auto
+    status = auto
+    branch = auto
 
 [color]
-	ui         = auto
-	branch     = auto
-	diff       = auto
-	grep       = auto
-	status     = auto
-	showbranch = auto
+    ui         = auto
+    branch     = auto
+    diff       = auto
+    grep       = auto
+    status     = auto
+    showbranch = auto
 
 # best not to touch these (very legible as is)
 [color "status"]
-	added     = green
-	changed   = "yellow bold"
-	untracked = "normal bold"
-	header    = "white dim"
-	nobranch  = "red dim"
+    added     = green
+    changed   = "yellow bold"
+    untracked = "normal bold"
+    header    = "white dim"
+    nobranch  = "red dim"
 
 # best not to touch these (very legible as is)
 [color "branch"]
-	current = magenta bold
-	local   = normal
-	remote  = yellow
+    current = magenta bold
+    local   = normal
+    remote  = yellow
 
 [color "grep"]
-	match      = yellow
-	filename   = magenta
-	linenumber = green
-	separator  = white
+    match      = yellow
+    filename   = magenta
+    linenumber = green
+    separator  = white
 
 [pager]
-	diff        = off
-	shortlog    = off
-	add         = off
-	aliases     = off
-	archive     = off
-	branch      = off
-	checkout    = off
-	clone       = off
-	commit      = off
-	fetch       = off
-	gc          = off
-	grep        = off
-	init        = off
-	log         = off
-	ls-files    = off
-	ls-remote   = off
-	merge       = off
-	mktag       = off
-	mv          = off
-	pull        = off
-	reflog      = off
-	rm          = off
-	show-branch = off
-	stash       = off
-	status      = off
-	tag         = off
+    diff        = off
+    shortlog    = off
+    add         = off
+    aliases     = off
+    archive     = off
+    branch      = off
+    checkout    = off
+    clone       = off
+    commit      = off
+    fetch       = off
+    gc          = off
+    grep        = off
+    init        = off
+    log         = off
+    ls-files    = off
+    ls-remote   = off
+    merge       = off
+    mktag       = off
+    mv          = off
+    pull        = off
+    reflog      = off
+    rm          = off
+    show-branch = off
+    stash       = off
+    status      = off
+    tag         = off
 
 [alias]
-	root = rev-parse --show-toplevel
-	untracked = ls-files . --ignored --exclude-standard --others
-	contributors = shortlog --summary --numbered
-	branches = branch --format='%(if)%(HEAD)%(then)%(color:bold magenta)%(end)%(align:42,left)  %(refname:lstrip=2) %(end) %(color:bold yellow)%(objectname:short=10)%(color:reset) => %(color:bold blue)%(upstream:lstrip=2)'
-	archive-zip = archive --format=zip --output=bundle.zip --verbose HEAD
-	archive-tar = archive --format=tar --output=bundle.tar --verbose HEAD
+    root = rev-parse --show-toplevel
+    untracked = ls-files . --ignored --exclude-standard --others
+    contributors = shortlog --summary --numbered
+    branches = branch --format='%(if)%(HEAD)%(then)%(color:bold magenta)%(end)%(align:42,left)  %(refname:lstrip=2) %(end) %(color:bold yellow)%(objectname:short=10)%(color:reset) => %(color:bold blue)%(upstream:lstrip=2)'
+    archive-zip = archive --format=zip --output=bundle.zip --verbose HEAD
+    archive-tar = archive --format=tar --output=bundle.tar --verbose HEAD
+[credential]
+	helper = manager

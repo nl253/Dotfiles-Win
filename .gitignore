@@ -59,3 +59,56 @@ ntuser.pol
 .rustup
 scoop
 .vscode/extensions
+.eslintrc.json 
+.[A-Z]*20[1-2]*
+.angular-config.json 
+.azure-kubectl
+.azure
+.cargo
+.config\configstore
+.config\hub
+.config\octave
+.config\scoop
+Boostnote
+Documents
+_netrc
+hirschberg.ts
+ngproj.xml
+AppData/Roaming/Adobe
+.vsts
+.ssh
+.templateengine
+.nuget
+.multirust
+.matplotlib
+.kube
+.dbshell
+.emacs.d
+.hex
+.ipython
+.mix
+AppData\Roaming\.emacs.d
+AppData/Roaming/Battle.net
+AppData/Roaming/Code/rapid_render.json
+AppData/Roaming/GIMP
+AppData/Roaming/GitHub Desktop
+AppData/Roaming/JetBrains
+AppData/Roaming/Logishrd
+AppData/Roaming/Logitech
+AppData/Roaming/MongoDB Compass Community
+AppData/Roaming/Mozilla
+AppData/Roaming/NuGet
+AppData/Roaming/Oni
+AppData/Roaming/Origin
+AppData/Roaming/Postman
+AppData/Roaming/Python
+AppData/Roaming/ScriptedHost
+AppData/Roaming/Skype
+AppData/Roaming/StorageExplorer
+AppData/Roaming/Victor Vran
+AppData/Roaming/azuredatastudio
+AppData/Roaming/cabal
+AppData/Roaming/discord
+AppData/Roaming/local
+AppData/Roaming/npm
+AppData/Roaming/runic games

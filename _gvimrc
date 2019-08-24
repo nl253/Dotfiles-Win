@@ -1,3 +1,4 @@
+colo spacemacs-theme
 if has("gui_gtk2") || has("gui_gtk3")
   setg guifont=Courier\ New\ 11
 elseif has("gui_photon")
@@ -7,5 +8,6 @@ elseif has("gui_kde")
 elseif has("x11")
   setg guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
 else
-  setg guifont=Consolas:h12
+  " setg guifont=Hack:h12:w7
+  setg guifont=Fira\ Code
 endif

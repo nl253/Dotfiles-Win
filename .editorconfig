@@ -1,0 +1,43 @@
+# editorconfig.org
+# vim:ft=cfg:
+
+# top-most editorconfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+tab_width = 2
+
+[*.{js,ts,jsx,json,sass,scss,pcss,css,md,yml,html}]
+indent_size = 2
+indent_style = space
+tab_width = 4
+trim_trailing_whitespace = true
+
+[*.{rs,py}]
+indent_size = 4
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.{wiki,rst}]
+indent_size = 4
+indent_style = tab
+trim_trailing_whitespace = true
+
+[*.{sh,zsh,yml,yaml}]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+trim_trailing_whitespace = true
+
+[*.vim]
+indent_size = 4
+indent_style = tab
+trim_trailing_whitespace = false
+
+[{makefile,makefile}]
+indent_size = 2
+indent_style = space

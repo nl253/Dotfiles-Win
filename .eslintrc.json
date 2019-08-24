@@ -10,11 +10,7 @@
   },
   "extends": [
     "eslint:all",
-    "eslint:recommended",
-    "plugin:node/recommended",
-    "plugin:security/recommended",
-    "plugin:promise/recommended",
-    "airbnb"
+    "eslint:recommended"
   ],
   "globals": {
     "Array": true,
@@ -43,13 +39,7 @@
     "ecmaVersion": 8,
     "sourceType": "module"
   },
-  "plugins": [
-    "optimize-regex",
-    "filenames",
-    "promise",
-    "compat",
-    "security"
-  ],
+  "plugins": [],
   "root": true,
   "rules": {
     "accessor-pairs": [
