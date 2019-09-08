@@ -24,3 +24,4 @@ set virtualedit=all
 set visualbell
 set wildmode=full
 set wrap
+set clipboard+=ideaput
