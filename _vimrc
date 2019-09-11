@@ -25,7 +25,7 @@ aug END
 
 if has('nvim')
   "so ~\_gvimrc
-  setg shada=!,'20,<50,s10,h,:50,f10 inccommand=nosplit clipboard= mouse=a runtimepath^=~\.vim runtimepath+=~\.vim\after runtimepath-=~\AppData\Local\nvim runtimepath-=~\AppData\Local\nvim\after runtimepath-=~\AppData\Local\nvim\site
+  setg shada=!,'20,<50,s10,h,:50,f10 inccommand=nosplit clipboard=unnamed mouse=a runtimepath^=~\.vim runtimepath+=~\.vim\after runtimepath-=~\AppData\Local\nvim runtimepath-=~\AppData\Local\nvim\after runtimepath-=~\AppData\Local\nvim\site
   let &packpath = &runtimepath
 else
   filetype plugin on
