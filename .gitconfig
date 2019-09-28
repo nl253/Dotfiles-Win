@@ -1,32 +1,50 @@
 # vim:sw=2:ts=4:expandtab:foldmethod=indent:
+[init]
+  templatedir = C:\\Users\\Kier\\.git-templates
+
 [user]
-  name  = Norbert Logiewa
   email = norbertlogiewa96@gmail.com
+  name  = Norbert Logiewa
 
 [core]
   excludesfile = C:\\Users\\Kier\\.gitignore-global
+  compression  = 9
+  abbrev       = 9
 
 [diff]
-  tool       = nvim
   renames    = copies  # Detect copies as well as renames
+  tool       = vimdiff
+  context    = 1
   algorithm  = minimal
   colorMoved = dimmed_zebra
-  indentHeuristic = true
-  context    = 2
   wordRegex  = \\w+
+  indentHeuristic = true
 
 [help]
-  autoCorrect = 0
+  autocorrect = true
 
 [difftool]
-  prompt = 1
+  prompt = true
 
 [log]
-  date = human
-  abbrevCommit = 1
+  abbrevCommit = true
+  date         = format:%d-%m-%g %R
+
+[apply]
+  # Detect whitespace errors when applying a patch
+  whitespace = fix 
+
+[web]
+  browser = msedge
+
+[merge]
+  tool      = vimdiff
+  verbosity = 1
+  summary   = true
 
 [status]
-  short = 1
+  showUntrackedFiles = all
+  short = true
 
 [format]
   pretty = %>(16)%ad %Cblue%>(22)%cN%Creset %Cgreen%h%Creset %s
@@ -36,10 +54,6 @@
   patternType = extended
   lineNumber = 1
 
-[column]
-  ui = auto
-  status = auto
-  branch = auto
 
 [color]
   ui         = auto
@@ -50,6 +64,18 @@
   showbranch = auto
 
 # best not to touch these (very legible as is)
+[color "diff"]
+  meta = "127"
+  frag = magenta bold # line info
+  old  = "167"        # deletions
+  new  = "78"         # additions
+
+# best not to touch these (very legible as is)
+[color "diff-highlight"]
+  oldNormal    = "167 bold"
+  oldHighlight = "167 reverse"
+  newNormal    = "78"
+  newHighlight = "78 reverse"
 [color "status"]
   added     = green
   changed   = "yellow bold"
@@ -57,17 +83,36 @@
   header    = "white dim"
   nobranch  = "red dim"
 
-# best not to touch these (very legible as is)
 [color "branch"]
   current = magenta bold
   local   = normal
   remote  = yellow
+
+[gui]
+  commitmsgwidth = 79
+  fastcopyblame  = true
+  fontui = -family \"Noto Sans\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+  fontdiff = -family \"Fira Code\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+  warndetachedcommit = true
+  pruneduringfetch = true
+  matchtrackingbranch = true
+  diffopts = -w
+  tabsize = 4
 
 [color "grep"]
   match      = yellow
   filename   = magenta
   linenumber = green
   separator  = white
+
+[column]
+  ui = auto
+  status = auto
+  branch = auto
+
+[pack]
+  compression = 9
+  threads     = 4
 
 [pager]
   diff        = off
@@ -117,12 +162,21 @@
 
   ignored = !git status --ignored | grep -E '^!' | sed -E 's/!! //' | sed -E 's/\\/$//' 
   untracked = ls-files . --ignored --exclude-standard --others
+
   branches = branch --format='%(if)%(HEAD)%(then)%(color:bold magenta)%(end)%(align:42,left)  %(refname:lstrip=2) %(end) %(color:bold yellow)%(objectname:short=10)%(color:reset) => %(color:bold blue)%(upstream:lstrip=2)'
+
+  # bundle repo
+  archive-zip = "archive --format=zip --output=bundle.zip --verbose HEAD"
+  archive-tar = "archive --format=tar --output=bundle.tar --verbose HEAD"
+  archive-7z  = "!bash -c ' cd $(git rev-parse --show-toplevel) && 7z a -mx=9 bundle.7z -- $(git ls-files)'"
+
+  # Use the following command while being on "master", to list merged branches:
+  merged-branches = "!f() { command git branch --merged | grep -v \"\\*\"; }; f ; unset -f f" 
 
   contributors = shortlog --summary --numbered
 
-  archive-zip = archive --format=zip --output=bundle.zip --verbose HEAD
-  archive-tar = archive --format=tar --output=bundle.tar --verbose HEAD
+    # list aliases from this file
+  aliases = "!git config -l | grep alias | sed 's/^alias\\.//g' | sed -E 's/=/%%%/' | column --table --output-separator ' ' --separator '%%%'"
 
-[credential]
-  helper = manager
+    # recursively update repos
+  rec-pull = "!for i in $(find -type d -name '.git' -exec readlink  -f {} \\;); do git --no-pager -C \"$(dirname $i)\" pull; done"
