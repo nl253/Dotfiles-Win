@@ -1,13 +1,14 @@
-# vim:sw=2:ts=4:expandtab:foldmethod=indent:
+# vim:sw=2:ts=4:expandtab:
 [init]
   templatedir = C:\\Users\\Kier\\.git-templates
 
+
 [user]
-  email = norbertlogiewa96@gmail.com
-  name  = Norbert Logiewa
+  email = Norbert.Logiewa@searchflow.co.uk
+  name = Norbert Logiewa
 
 [core]
-  excludesfile = C:\\Users\\Kier\\.gitignore-global
+  excludesfile = C:\\Users\\nlogiewa\\.gitignore-global
   compression  = 9
   abbrev       = 9
 
@@ -28,7 +29,8 @@
 
 [log]
   abbrevCommit = true
-  date         = format:%d-%m-%g %R
+  # date         = format:%d-%m-%g %R
+  date         = human
 
 [apply]
   # Detect whitespace errors when applying a patch
@@ -43,7 +45,7 @@
   summary   = true
 
 [status]
-  showUntrackedFiles = all
+  # showUntrackedFiles = all
   short = true
 
 [format]
@@ -65,10 +67,10 @@
 
 # best not to touch these (very legible as is)
 [color "diff"]
-  meta = "127"
+  meta = magenta
   frag = magenta bold # line info
-  old  = "167"        # deletions
-  new  = "78"         # additions
+  old  = red        # deletions
+  new  = green         # additions
 
 # best not to touch these (very legible as is)
 [color "diff-highlight"]
@@ -143,8 +145,16 @@
   tag         = off
 
 [alias]
+
   worddiff = diff --word-diff=color -word-diff-regex="[A-Za-z0-9. ]|[^[:space:]]" 
-  # search through history
+
+  c = commit
+  b = branch
+  a = add
+  l = log
+  s = status
+  d = diff -w -b --ignore-blank-lines --color-moved-ws=ignore-all-space
+
   find = log -G  
   find-added    = log --diff-filter=A -G  
   find-created  = log --diff-filter=A -G  
@@ -154,29 +164,47 @@
   find-changed  = log --diff-filter=M -G  
 
   unpushed = !git log "$(git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD))..HEAD"
-
   graph = log --graph 
   tree = log --graph 
 
-  root = rev-parse --show-toplevel
+  root      = rev-parse --show-toplevel
 
-  ignored = !git status --ignored | grep -E '^!' | sed -E 's/!! //' | sed -E 's/\\/$//' 
+  ignored   = !git status --ignored | grep -E '^!' | sed -E 's/!! //' | sed -E 's/\\/$//' 
   untracked = ls-files . --ignored --exclude-standard --others
 
   branches = branch --format='%(if)%(HEAD)%(then)%(color:bold magenta)%(end)%(align:42,left)  %(refname:lstrip=2) %(end) %(color:bold yellow)%(objectname:short=10)%(color:reset) => %(color:bold blue)%(upstream:lstrip=2)'
+  bs = branch --format='%(if)%(HEAD)%(then)%(color:bold magenta)%(end)%(align:42,left)  %(refname:lstrip=2) %(end) %(color:bold yellow)%(objectname:short=10)%(color:reset) => %(color:bold blue)%(upstream:lstrip=2)' 
 
-  # bundle repo
-  archive-zip = "archive --format=zip --output=bundle.zip --verbose HEAD"
-  archive-tar = "archive --format=tar --output=bundle.tar --verbose HEAD"
-  archive-7z  = "!bash -c ' cd $(git rev-parse --show-toplevel) && 7z a -mx=9 bundle.7z -- $(git ls-files)'"
+
+  archive-zip = archive --format=zip --output=bundle.zip --verbose HEAD
+  archive-tar = archive --format=tar --output=bundle.tar --verbose HEAD
+
+  # remove local branches that don't have a corresponding remote branch 
+  prune = remote prune <name>
+
+  # search through history
+  trace                   = log -L
+  find-commit             = log --grep
+  find-in-commit          = log -G  
+  find-in-commit-added    = log --diff-filter=A -G  
+  find-in-commit-created  = log --diff-filter=A -G  
+  find-in-commit-deleted  = log --diff-filter=D -G  
+  find-in-commit-removed  = log --diff-filter=D -G  
+  find-in-commit-modified = log --diff-filter=M -G  
+  find-in-commit-changed  = log --diff-filter=M -G  
+
+  unpushed = log --branches --not --remotes --no-walk --decorate --oneline
 
   # Use the following command while being on "master", to list merged branches:
   merged-branches = "!f() { command git branch --merged | grep -v \"\\*\"; }; f ; unset -f f" 
 
   contributors = shortlog --summary --numbered
-
-    # list aliases from this file
+  # list aliases from this file
   aliases = "!git config -l | grep alias | sed 's/^alias\\.//g' | sed -E 's/=/%%%/' | column --table --output-separator ' ' --separator '%%%'"
 
-    # recursively update repos
-  rec-pull = "!for i in $(find -type d -name '.git' -exec readlink  -f {} \\;); do git --no-pager -C \"$(dirname $i)\" pull; done"
+[push]
+  default = current
+
+[branch]
+  autoSetupMerge = true
+  sort = refname

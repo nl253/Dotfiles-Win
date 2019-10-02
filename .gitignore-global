@@ -1,4 +1,11 @@
 # vim:ft=gitconfig:
+## generated documentation
+
+**/doc
+**/docs
+docs
+doc
+
 ## tmp files
 
 **/*.swap
@@ -18,6 +25,7 @@
 
 ## VCS
 
+**/.git
 **/.idea
 **/.svn
 
@@ -42,7 +50,8 @@
 
 ## package managers
 
-**/node_modules/
+node_modules
+**/node_modules
 **/*-lock.json
 **/*.lock
 
@@ -62,7 +71,6 @@
 **/*.class
 **/target
 **/out
-**/docs
 **/build
 **/dist
 
@@ -73,7 +81,6 @@
 ## C and C++
 
 **/*.o
-**/doc
 
 ## Python
 

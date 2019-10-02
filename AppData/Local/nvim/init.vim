@@ -1,1 +1,1 @@
-so ~/_vimrc
+so ~\.config\nvim\init.vim
