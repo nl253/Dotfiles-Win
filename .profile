@@ -12,6 +12,23 @@ export EMAIL='norbertlogiewa96@gmail.com'
 # Don't check mail when opening terminal.
 unset -v MAILCHECK
 
+# $EDITOR
+for i in nvim vim vi; do
+  if [ -x /usr/bin/$i ]; then
+    export EDITOR=/usr/bin/$i && break
+    eval "alias vim='$i'"
+  fi
+done
+
+# $PAGER
+if [ -x /usr/bin/less ]; then
+  export LESS='--RAW-CONTROL-CHARS --IGNORE-CASE --QUIET --HILITE-SEARCH --long-prompt'
+  if [ -x $(command which pygmentize 2>/dev/null) ]; then
+    export LESSOPEN='| pygmentize %s'
+  fi
+  export PAGER=less
+fi
+
 #export HISTIGNORE="&:[ ]*:pwd:exit:cd:ls:bg:fg:history:clear:jobs:git*:ls*:dirs *:vim*:nvim*:ghci*:date:ranger:alias:dirs:popd:mutt:bash*:shopt:set:env:enable:"
 #export HISTTIMEFORMAT='%c'
 export FIGNORE='~:.o:.swp:history:.class:cache:.pyc:.aux:.toc:.fls:.lock:.tmp:tags:.log:.hi:.so:.beam:tags:.iml:.lock:.bak:.idx:.pack'
@@ -38,3 +55,15 @@ export FZF_DEFAULT_OPTS=" --filepath-word --history-size=10000 --history=$HOME/.
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind='ctrl-y:yank,alt-c:execute(cd {})' --bind='alt-b:backward-word,alt-f:forward-word' --bind='alt-v:half-page-up,ctrl-v:half-page-down,ctrl-d:half-page-down,ctrl-u:half-page-up,alt-p:toggle-preview,ctrl-n:down,ctrl-p:up'"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind='alt-e:execute(\$EDITOR {})' --bind='alt-l:execute:(\$PAGER {})'"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=hl:160,fg+:11,border:0,spinner:0,header:0,bg+:0,info:0"
+
+if [ -e ~/.config/ranger/scope.sh ]; then
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"' --preview="command bash ~/.config/ranger/scope.sh {} $(command tput cols) $(command tput lines) /tmp/ False"'
+elif [ -x $(command which pygmentize 2>/dev/null) ]; then
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"' --preview="([ -f {} ] && command head -n $(tput lines) {} | command pygmentize -l $(pygmentize -N {})) || ([ -d {} ] && command tree -l -a --prune -L 4 -F --sort=mtime {})"'
+else
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS"' --preview="[ -f {} ] && command head -n $(tput lines) {} || [ -d {} ] && tree -l -a --prune -L 4 -F --sort=mtime {}"'
+fi
+
+if [ $0 = bash ] || [ $0 = $(which bash 2>/dev/null) ]; then
+  [[ ! $- =~ i ]] && [[ -n $TMUX ]] && [[ -f ~/.bashrc ]] && source ~/.bashrc
+fi

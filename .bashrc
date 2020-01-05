@@ -1,4 +1,11 @@
+# ~/.bashrc  executed by bash(1)
+
 alias vim=nvim
+
+if ((BASH_VERSINFO < 4)); then
+  echo "[ERROR] your bash is outdated, install bash >= 4"
+  return 0
+fi
 
 shopt -s xpg_echo globasciiranges histappend checkjobs checkwinsize \
   globstar extglob dotglob nocasematch nocaseglob cdspell dirspell \
@@ -7,10 +14,15 @@ shopt -s xpg_echo globasciiranges histappend checkjobs checkwinsize \
 PROMPT_COMMAND="history -a"
 
 PS1=' >> '
-export EDITOR=vim
+export EDITOR=nvim
 for i in ls diff grep; do
   eval "alias $i='$i --color=always'"
 done
+
+alias grep='command grep -E -I --color=auto'
+if [[ -x ~/.cargo/bin/rg ]]; then
+  alias rg='command rg --hidden --pretty --no-heading --threads $(grep -c ^processor /proc/cpuinfo) --context 1 --max-count 3 --no-search-zip'
+fi
 
 # this here is very format dependent - do not change
 # dirs and files
@@ -23,10 +35,9 @@ else
 fi
 unset -v ls_opts
 
-alias grep='command grep -E -I --color=auto'
-if [ -x ~/.cargo/bin/rg ]; then
-  alias rg='command rg --hidden --pretty --no-heading --threads $(grep -c ^processor /proc/cpuinfo) --context 1 --max-count 3 --no-search-zip'
-fi
+for file in completions; do
+  [[ -f ~/.config/bash/$file.sh ]] && . ~/.config/bash/$file.sh
+done
 
 non_git_prompt='$(command basename $0):/$PWD :: '
 

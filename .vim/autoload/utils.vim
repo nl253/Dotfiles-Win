@@ -263,6 +263,7 @@ fu! utils#git_status_summary()
 			let l:msg .= "[?]"
 		endif
 	endif
+
     return l:msg.' | '
 endf
 

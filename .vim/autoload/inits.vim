@@ -87,3 +87,11 @@ fu! inits#emmet() abort
         im <buffer> <Tab> <plug>(emmet-expand-abbr)
     endif
 endf
+
+fu! inits#gui() abort
+    exe 'set guifont='.(has('win32') ? 'consolas:h11.4:w5.8:qPROOF' : 'Monospace\ 13')
+    setg guioptions-=TmlLbRrg guioptions+=iphMa
+    for i in filter(['no_buffers_menu', 'did_install_default_menus', 'did_install_syntax_menu'], '!exists("g:".v:val)')
+        exec 'let g:'.i.' = 1'
+    endfor
+endf

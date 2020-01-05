@@ -1,7 +1,13 @@
 " vim: nospell foldmethod=marker foldlevel=1 formatoptions=o
 exe 'let $MYVIMRC = '.string(expand('<sfile>'))
 
-let &packpath = &runtimepath
+setg rtp-=~/.vim
+exe 'setg rtp-='.expand('~/.vim')
+setg rtp^=~/.vim
+
+setg rtp-=~/.vim/after
+exe 'setg rtp-='.expand('~/.vim/after')
+setg rtp+=~/.vim/after
 
 " Variables: (these need to be global)
 let g:mapleader      = ' '

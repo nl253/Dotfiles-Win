@@ -1,6 +1,7 @@
 " Options that need to be set globally (i.e. only once on Vim start-up).
 
 if !has('win32') && !exists(":Man") | ru! ftplugin/man.vim | endif
+if has('gui_running') | call opts#gui()      | endif
 pa justify
 
 for s:dir in filter(map([
