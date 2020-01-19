@@ -63,13 +63,13 @@ sy region jsTemplStrSubst start='\${' end='}' keepend matchgroup=Delimiter conta
 " sy region jsJSXTagInner start="\v\<([a-z]+)( [a-z]+(\=\".{,20}\")?)*\>" end="\v</\1\>" keepend
 
 " often we put HTML tags in js templates
-sy region jsTemplStrHtmlTag          start="\v\<([a-z]+[1-6]?)([ \n\t]+[-a-zA-Z]+(\=\"[^\"]*\")?)*\>" end="\v</\1\>" contained contains=jsTemplStrHtmlTagInner,jsTemplStrHtmlTag,jsTemplStrHtmlTagAttr keepend
-sy region jsTemplStrHtmlTagInner     start="\v\>"ms=e+1 end="\v\<"me=s-1 contained keepend
-sy match  jsTemplStrHtmlTagAttr      "\v <[a-z]{3,15}>"ms=s+1 contained keepend
-sy region jsTemplStrHtmlTagAttr      start="\v[a-z]{2,15}\=\"" end="\"" oneline contained contains=jsTemplStrHtmlTagAttrName,jsTemplStrHtmlTagAttrValue,jsTemplStrHtmlTagAttrEq keepend
-sy match  jsTemplStrHtmlTagAttrName  "\v[a-z]{2,15}\="me=e-1 contained keepend
-sy match  jsTemplStrHtmlTagAttrEq    "\v\=" contained 
-sy region jsTemplStrHtmlTagAttrValue start='"' end='"' oneline contained keepend
+" sy region jsTemplStrHtmlTag          start="\v\<([a-z]+[1-6]?)([ \n\t]+[-a-zA-Z]+(\=\"[^\"]*\")?)*\>" end="\v</\1\>" contained contains=jsTemplStrHtmlTagInner,jsTemplStrHtmlTag,jsTemplStrHtmlTagAttr keepend
+" sy region jsTemplStrHtmlTagInner     start="\v\>"ms=e+1 end="\v\<"me=s-1 contained keepend
+" sy match  jsTemplStrHtmlTagAttr      "\v <[a-z]{3,15}>"ms=s+1 contained keepend
+" sy region jsTemplStrHtmlTagAttr      start="\v[a-z]{2,15}\=\"" end="\"" oneline contained contains=jsTemplStrHtmlTagAttrName,jsTemplStrHtmlTagAttrValue,jsTemplStrHtmlTagAttrEq keepend
+" sy match  jsTemplStrHtmlTagAttrName  "\v[a-z]{2,15}\="me=e-1 contained keepend
+" sy match  jsTemplStrHtmlTagAttrEq    "\v\=" contained 
+" sy region jsTemplStrHtmlTagAttrValue start='"' end='"' oneline contained keepend
 
 sy region  jsRegexStr start=+/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gim]\{0,2\}\s*$+ end=+/[gim]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@regexAll oneline keepend
 

@@ -15,17 +15,4 @@ _vim() {
 }
 
 complete -F _vim -A file vim nvim
-
-_read() {
-  local cur="${COMP_WORDS[COMP_CWORD]}"
-  if [[ "${COMP_WORDS[COMP_CWORD - 1]}" == read ]]; then
-    local comms="-a -d -i -n -N -p"
-    COMPREPLY=($(compgen -W "${comms}" -- ${cur}))
-  fi
-  return 0
-}
-
-complete -F _read read
-
-[[ $(command hostname) =~ raptor ]] && source /etc/bash_completion
 # vim:ft=sh:

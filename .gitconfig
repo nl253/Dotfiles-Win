@@ -37,7 +37,7 @@
   whitespace = fix 
 
 [web]
-  browser = msedge
+	browser = firefox-dev
 
 [merge]
   tool      = vimdiff

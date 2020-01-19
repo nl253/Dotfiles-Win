@@ -1,5 +1,5 @@
 let mapleader = " "
-set clipboard+=ideaput
+set clipboard+=unnamed
 set commentary
 set diffopt=filler,vertical
 set foldmethod=marker
